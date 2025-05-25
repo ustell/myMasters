@@ -1,101 +1,151 @@
-import Image from "next/image";
+import { ProfiCard } from '@/components/shared/ProfiCard';
+import { ProfiList } from '@/components/shared/ProfiList';
+import { ReviewCard } from '@/components/shared/reviews/reviews';
+import { SearchTip } from '@/components/shared/search-tip';
+import { Section } from '@/components/shared/Section';
+import { categoriesData } from '@/data/categories';
+import Phone from '@/public/mobile.png';
+import Image from 'next/image';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const reviews = [
+    {
+      userName: 'Эмель Айкач',
+      avatar: '/users/emel.jpg',
+      rating: 4.9,
+      reviewsCount: 236,
+      opinion: 'Очень хвалят',
+      text: 'Всё отлично! Спасибо!',
+      category: 'Перевод',
+    },
+    {
+      userName: 'Марина Петрова Сергеевна',
+      avatar: '/users/marina.jpg',
+      rating: 4.8,
+      reviewsCount: 186,
+      opinion: 'Хорошо',
+      text: 'Профессионал своего дела. Рекомендую',
+      category: 'Психология',
+    },
+    {
+      userName: 'Артём Комаров Кириллович',
+      avatar: '/users/artem.jpg',
+      rating: 4.9,
+      reviewsCount: 327,
+      opinion: 'Хорошо',
+      text: 'Очень ответственный специалист.',
+      category: 'Маркетинг',
+    },
+    {
+      userName: 'Елизавета Белова Сергеевна',
+      avatar: '/users/eliza.jpg',
+      rating: 4.7,
+      reviewsCount: 178,
+      opinion: 'Хорошо',
+      text: 'Спасибо за помощь, всё понятно объясняет',
+      category: 'Математика',
+    },
+    {
+      userName: 'Жуков Андрей Романович',
+      avatar: '/users/andrey.jpg',
+      rating: 4.3,
+      reviewsCount: 113,
+      opinion: 'Нормально',
+      text: 'Хороший репетитор! Замечательно',
+      category: 'Музыка',
+    },
+    {
+      userName: 'Ферди Оралоглу Надиевич',
+      avatar: '/users/ferdi.jpg',
+      rating: 4.8,
+      reviewsCount: 187,
+      opinion: 'Хорошо',
+      text: 'Фотографии получились супер! Спасибо',
+      category: 'Фотограф',
+    },
+    {
+      userName: 'Алексей Кудрявцев Алексеевич',
+      avatar: '/users/alexey.jpg',
+      rating: 4.7,
+      reviewsCount: 145,
+      opinion: 'Очень хвалят',
+      text: 'Работа мастера понравилась. Всё качественно',
+      category: 'Электрик',
+    },
+    {
+      userName: 'Яна Бондарева Владимировна',
+      avatar: '/users/yana.jpg',
+      rating: 4.9,
+      reviewsCount: 210,
+      opinion: 'Отлично',
+      text: 'Спасибо за крутую идею!',
+      category: 'Прически',
+    },
+    {
+      userName: 'Малышева Анна Олеговна',
+      avatar: '/users/anna.jpg',
+      rating: 4.6,
+      reviewsCount: 127,
+      opinion: 'Нормально',
+      text: 'Все прошло хорошо! Спасибо Вам!',
+      category: 'Лечение кошек',
+    },
+  ];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    <main>
+      <section className=" wrapper container flex flex-col-reverse lg:flex-row items-center justify-between gap-10">
+        <div className="w-full lg:w-[70%] max-w-2xl space-y-6">
+          <h1 className="text-5xl font-bold leading-tight">
+            Дела исполняются с{' '}
+            <span className="uppercase text-primary">мастерами</span>
+          </h1>
+          <p className="text-muted text-lg">
+            12 856 клиентов доверили дела мастерам
+          </p>
+          <SearchTip data={categoriesData} />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+
+        <div className="hidden lg:block lg:w-[30%] self-end">
+          <Image src={Phone} alt="Телефон" className="ml-auto" priority />
+        </div>
+      </section>
+      <section className="container flex gap-2 justify-between wrapper">
+        {[
+          { img: 'image1.jpg', title: 'Card 1' },
+          { img: 'image2.jpg', title: 'Card 2' },
+          { img: 'image3.jpg', title: 'Card 3' },
+          { img: 'image4.jpg', title: 'Card 4' },
+          { img: 'image5.jpg', title: 'Card 5' },
+        ].map(({ img, title }) => (
+          <ProfiCard key={title} img={img} title={title} />
+        ))}
+      </section>
+      <Section
+        title="Мастера в Анталии"
+        subtitle="В вашем регионе работает 134 специалистов, ещё 2630 готовы помочь дистанционно."
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-8"
+      >
+        {categoriesData.map((category) => (
+          <ProfiList
+            items={category.fullServices}
+            category={category.category}
+            key={category.id}
+            count={category.count}
+            allItem={category.all}
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        ))}
+      </Section>
+
+      <Section
+        title="Отзывы"
+        subtitle="733 отзывов оставили клиенты за последние 12 месяцев. Из них 1 598 — положительные."
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-3"
+      >
+        {reviews.map((review, idx) => (
+          <ReviewCard user={review.userName} key={idx} {...review} />
+        ))}
+      </Section>
+    </main>
   );
 }
